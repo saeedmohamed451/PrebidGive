@@ -5,6 +5,10 @@
  */
 package give;
 
+import give.base.controller.BaseController;
+import give.base.db.DBConfig;
+import give.core.db.GiveDBHelper;
+import give.core.model.UserModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +21,18 @@ import javafx.stage.Stage;
  */
 public class Give extends Application {
     
+    public static GiveDBHelper G_DBHelper = null;
+    public static String RESOURCE_PATH = null;
+    public static UserModel LOGIN_USER = null;
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/fxml_login.fxml"));
+        RESOURCE_PATH = getClass().getResource("").toString();
+        
+        Parent root = FXMLLoader.load(BaseController.getResourceURL("view/fxml_login.fxml"));
         
         Scene scene = new Scene(root);
+        stage.resizableProperty().setValue(Boolean.FALSE);
         
         stage.setTitle("Give");
         stage.setScene(scene);
@@ -32,7 +43,19 @@ public class Give extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        G_DBHelper = new GiveDBHelper(new DBConfig());
+        
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+              G_DBHelper.closeDB();
+            }
+        });
+                
         launch(args);
     }
+    
+    
+    
     
 }

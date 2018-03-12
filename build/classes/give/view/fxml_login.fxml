@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.LoginController">
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.LoginController">
    <children>
       <Label alignment="CENTER" prefHeight="92.0" prefWidth="381.0" text="Welcome to Give">
          <font>
@@ -39,13 +39,13 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="username" GridPane.columnIndex="1" />
-            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtUserEmail" GridPane.columnIndex="1" />
+            <PasswordField fx:id="txtPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="24.0" prefWidth="151.0" text="Log In" />
-      <Hyperlink text="Create an account" />
-      <Hyperlink text="forgot password" />
+      <Hyperlink onAction="#onCreateAccountPressed" text="Create an account" />
+      <Hyperlink onAction="#onForgotPressed" text="forgot password" />
    </children>
    <padding>
       <Insets bottom="70.0" left="100.0" right="100.0" top="70.0" />

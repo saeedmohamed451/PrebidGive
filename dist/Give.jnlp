@@ -8,7 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Give.jar" size="6670000" download="eager" />
+    <jar href="Give.jar" size="6684763" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="843090" download="eager" />
+    <jar href="lib\org-apache-commons-codec.jar" size="46739" download="eager" />
+    <jar href="lib\org-apache-commons-logging.jar" size="60786" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Give" >
     <param name="requiredFXVersion" value="8.0+"/>

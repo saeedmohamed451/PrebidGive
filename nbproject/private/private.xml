@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/_Work/Prebid/Source/src/give/LoginController.java</file>
-            <file>file:/D:/_Work/Prebid/Source/src/give/GiveController.java</file>
-            <file>file:/D:/_Work/Prebid/Source/src/give/HomeController.java</file>
+            <file>file:/D:/_Temp/Prebid/src/give/core/controller/CharityEditController.java</file>
+            <file>file:/D:/_Temp/Prebid/src/give/core/controller/UserController.java</file>
+            <file>file:/D:/_Temp/Prebid/src/give/core/services/CharityService.java</file>
         </group>
     </open-files>
 </project-private>
