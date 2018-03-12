@@ -7,7 +7,7 @@ package give.model;
 
 /**
  *
- * @author noahwebb
+ * @author Administrator
  */
 public class User {
     

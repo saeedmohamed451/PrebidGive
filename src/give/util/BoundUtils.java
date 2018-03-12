@@ -7,11 +7,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-/**
- * Created on 2/25/2018 at 11:55 AM
- *
- * @author Nabin Bhandari
- */
 public class BoundUtils {
 
     // reference: https://stackoverflow.com/a/26204372/5137352
