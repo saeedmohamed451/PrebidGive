@@ -5,10 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48f6bcf5-8187-4a4c-97a3-aa6761f92d7d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/base/controller/BaseController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/CharityEditController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/CharityListController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/UserController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/core/model/CharityModel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/core/services/CharityService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/util/FileUtil.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/charity/1520932395.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/charity/1520933390.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/charity/1520949161.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/charity/1520949193.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/charity/1520953369.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/AdminHomeController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityEditController$1$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityEditController$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityEditController$2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityListController$1$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityListController$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/UserCharityController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/core/model/CategoryModel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/view/fxml_charity_edit.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/give/view/fxml_charity_list.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/view/charity_list.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/view/fxml_admin_home.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Prebid/give/view/fxml_user_charity.fxml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/core/controller/AdminHomeController.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/core/controller/UserCharityController.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/core/model/CategoryModel.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/view/charity_list.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/view/fxml_admin_home.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/give/view/fxml_user_charity.fxml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/build/classes/give/core/controller/AccountController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/build/classes/give/core/model/User.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/run545192341/Give.html" afterPath="" />
@@ -41,14 +68,10 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/run94444572/web-files/javafx-loading-25x25.gif" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/run94444572/web-files/upgrade_java.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/dist/run94444572/web-files/upgrade_javafx.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/1520881964.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/images/1520882114.jpg" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Prebid/give/core/controller/CharityController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/give/core/controller/CharityController.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/give/base/controller/BaseController.class" afterPath="$PROJECT_DIR$/build/classes/give/base/controller/BaseController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/give/core/controller/GiveController.class" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/GiveController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/give/core/controller/HomeController.class" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/HomeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/give/core/controller/UserController.class" afterPath="$PROJECT_DIR$/build/classes/give/core/controller/UserController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/classes/give/core/services/UserService.class" afterPath="$PROJECT_DIR$/build/classes/give/core/services/UserService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/Give.jar" afterPath="$PROJECT_DIR$/dist/Give.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Prebid/give/base/controller/BaseController.class" afterPath="$PROJECT_DIR$/out/production/Prebid/give/base/controller/BaseController.class" />
@@ -84,6 +107,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/give/view/fxml_charity_list.fxml" afterPath="$PROJECT_DIR$/src/give/view/fxml_charity_list.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/give/view/fxml_home.fxml" afterPath="$PROJECT_DIR$/src/give/view/fxml_home.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/give/view/fxml_login.fxml" afterPath="$PROJECT_DIR$/src/give/view/fxml_login.fxml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/1520881964.jpg" afterPath="$PROJECT_DIR$/images/category/1520881964.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/images/1520882114.jpg" afterPath="$PROJECT_DIR$/images/category/1520882114.jpg" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,8 +123,8 @@
       <file leaf-file-name="UserCharityController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/give/core/controller/UserCharityController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="418">
+              <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -763,12 +788,12 @@
       <option name="presentableId" value="Default" />
       <updated>1520874735528</updated>
       <workItem from="1520874736824" duration="13027000" />
-      <workItem from="1520938930117" duration="17363000" />
+      <workItem from="1520938930117" duration="17509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30390000" />
+    <option name="totallyTimeSpent" value="30536000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="402" y="37" width="1400" height="1001" extended-state="0" />
@@ -1115,8 +1140,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/give/core/controller/UserCharityController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="418">
+          <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
