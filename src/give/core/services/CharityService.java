@@ -9,9 +9,11 @@ import give.base.model.BaseModel;
 import give.base.services.BaseService;
 import give.core.model.CategoryModel;
 import give.core.model.CharityModel;
+import give.core.model.UserModel;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static give.base.controller.BaseController.getAppPath;
 
@@ -84,5 +86,58 @@ public class CharityService extends BaseService {
         }
 
         return arrReturn;
+    }
+
+
+    /**
+     *
+     * @param charityName
+     * @return
+     */
+    public HashMap<CategoryModel, ArrayList<CharityModel>> searchCharities(String charityName) {
+        HashMap<CategoryModel, ArrayList<CharityModel>> mapData = new HashMap<>();
+
+        String strSQL = "SELECT * FROM charity " + (charityName.length() > 0 ? "WHERE name LIKE '%" + charityName + "%'" : "");
+
+        ArrayList<BaseModel> arr = this.m_dbHelper.executeSQLAndReturnArray(strSQL, new Object[]{}, CharityModel.class.getSimpleName());
+
+        strSQL = "SELECT * FROM category " + (charityName.length() > 0 ? "WHERE id IN (SELECT category FROM charity WHERE name LIKE '%" + charityName + "%')" : "") + " ORDER BY id";
+        ArrayList<BaseModel> categories = this.m_dbHelper.executeSQLAndReturnArray(strSQL, new Object[]{}, CategoryModel.class.getSimpleName());
+
+        for(int i = 0; i < categories.size(); i++) {
+            CategoryModel category = (CategoryModel) categories.get(i);
+            mapData.put(category, new ArrayList<CharityModel>());
+        }
+
+        for(int i = 0; i < arr.size(); i++) {
+            CharityModel charity = (CharityModel)arr.get(i);
+
+            CategoryModel foundCat = null;
+            for(int c = 0; c < categories.size(); c++) {
+                CategoryModel category = (CategoryModel) categories.get(c);
+                if(category.getID() == charity.getCategory()) {
+                    foundCat = category;
+                    break;
+                }
+            }
+
+            if(foundCat != null) {
+                mapData.get(foundCat).add(charity);
+            }
+        }
+
+        return mapData;
+    }
+
+
+    /**
+     *
+     * @param user
+     * @return
+     */
+    public ArrayList<CharityModel> getSelectedCharities(UserModel user) {
+        ArrayList<CharityModel> arr = new ArrayList<>();
+
+        return arr;
     }
 }

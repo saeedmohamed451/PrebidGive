@@ -4,6 +4,7 @@ import give.base.model.BaseModel;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class CategoryModel extends BaseModel {
 
@@ -48,4 +49,15 @@ public class CategoryModel extends BaseModel {
 
         return arr;
     }
+
+    public static Comparator<CategoryModel> IDComparator = new Comparator<CategoryModel>() {
+
+        public int compare(CategoryModel s1, CategoryModel s2) {
+            if(s1.getID() > s2.getID()) return 1;
+
+            if(s1.getID() < s2.getID()) return -1;
+
+            return 0;
+        }
+    };
 }
