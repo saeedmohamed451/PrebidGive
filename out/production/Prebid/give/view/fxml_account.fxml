@@ -38,7 +38,7 @@
          </font>
       </Label>
       <Button layoutX="216.0" layoutY="304.0" mnemonicParsing="false" onAction="#onUpdateBtnPressed" prefHeight="25.0" prefWidth="126.0" text="Save" />
-      <Hyperlink layoutX="27.0" layoutY="335.0" text="Stats">
+      <Hyperlink fx:id="linkStats" layoutX="27.0" layoutY="335.0" text="Stats">
          <font>
             <Font size="18.0" />
          </font>

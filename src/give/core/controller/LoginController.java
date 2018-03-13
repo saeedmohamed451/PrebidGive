@@ -79,11 +79,8 @@ public class LoginController extends BaseController {
         
         // Move to Home Screen
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(BaseController.getResourceURL("view/fxml_home.fxml"));
+        loader.setLocation(BaseController.getResourceURL(findUser.getUserType() == UserModel.USER_TYPE_ADMIN ? "view/fxml_admin_home.fxml" : "view/fxml_home.fxml"));
         Scene homeScene = new Scene(loader.load());
-        
-        // Set the user for remainder of the session
-        HomeController homeController = loader.getController();
         
         // Get stage and transfer to home scene
         this.showWindow(event, homeScene);

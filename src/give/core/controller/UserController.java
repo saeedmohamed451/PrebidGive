@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -35,6 +36,8 @@ public class UserController extends BaseController implements Initializable {
     @FXML private TextField txtCurPwd;
     @FXML private TextField txtPassword;
     @FXML private TextField txtConfPwd;
+
+    @FXML private Hyperlink linkStats;
     
     String m_strCurLocation = "";
     UserService m_userService = new UserService();
@@ -47,6 +50,8 @@ public class UserController extends BaseController implements Initializable {
         if(this.m_strCurLocation.contains("fxml_account")) {
             lblUserName.setText(Give.LOGIN_USER.getUserName());
             txtUserEmail.setText(Give.LOGIN_USER.getUserEmail());
+
+            linkStats.setVisible(Give.LOGIN_USER.getUserType() == UserModel.USER_TYPE_ADMIN);
         }
     }
  

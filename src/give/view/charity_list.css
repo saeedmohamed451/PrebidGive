@@ -1,0 +1,5 @@
+
+#tableCharities .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 5px;
+}

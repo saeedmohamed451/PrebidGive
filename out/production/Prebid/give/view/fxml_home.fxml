@@ -21,7 +21,7 @@
       <VBox alignment="CENTER" layoutX="2.0" layoutY="77.0" prefHeight="223.0" prefWidth="594.0" spacing="20.0">
          <children>
             <Button mnemonicParsing="false" onAction="#giveButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Give" />
-            <Button mnemonicParsing="false" onAction="#charityButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Charities" />
+            <Button fx:id="btnCharity" mnemonicParsing="false" onAction="#charityButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Charities" />
             <Button mnemonicParsing="false" onAction="#accountButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Account" />
          </children>
       </VBox>

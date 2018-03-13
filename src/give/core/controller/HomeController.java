@@ -7,6 +7,7 @@ package give.core.controller;
 
 import give.Give;
 import give.base.controller.BaseController;
+import give.core.model.UserModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -98,24 +99,13 @@ public class HomeController extends BaseController implements Initializable {
     }
 
     public void charityButtonPressed(ActionEvent event) throws IOException {
-        Parent charityParent = FXMLLoader.load(BaseController.getResourceURL("view/fxml_charity_list.fxml"));
-        Scene charityScene = new Scene(charityParent);
-        
-        // Get stage and transfer to charity scene
-        this.showWindow(event, charityScene);
-    }
-    
-    
-    public void onLinkLogoutPressed(ActionEvent event) throws IOException {
-        if(this.showConfirm("Would you like to logout now?")) {
-            Give.LOGIN_USER = null;
-        
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(BaseController.getResourceURL("view/fxml_login.fxml"));        
-            Scene homeScene = new Scene(loader.load());
+        Parent accountParent = FXMLLoader.load(BaseController.getResourceURL("view/fxml_user_charity.fxml"));
+        Scene accountScene = new Scene(accountParent);
 
-            // Get stage and transfer to home scene
-            this.showWindow(event, homeScene);
-        }        
+        // Get stage and transfer to give scene
+        this.showWindow(event, accountScene);
     }
+    
+    
+
 }

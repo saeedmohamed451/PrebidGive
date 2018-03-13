@@ -6,6 +6,7 @@
 package give.core.controller;
 
 import give.base.controller.BaseController;
+import give.core.model.CategoryModel;
 import give.core.model.CharityModel;
 
 import java.io.File;
@@ -14,24 +15,25 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 
 import give.core.services.CharityService;
 import give.util.FileUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-
-import javax.imageio.ImageIO;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 /**
  *
@@ -41,7 +43,7 @@ public class CharityEditController extends BaseController implements Initializab
     
     @FXML private TextField txtName;
     @FXML private TextField txtSite;
-    @FXML private TextField txtCategory;
+    @FXML private ComboBox<CategoryModel> comboCategory;
     @FXML private TextField txtAmount;
     @FXML private TextField txtNumber;
     @FXML private TextField txtMetric;
@@ -53,8 +55,11 @@ public class CharityEditController extends BaseController implements Initializab
 
     
     // Data Variable
+    private ObservableList<CategoryModel> comboData = FXCollections.observableArrayList();
+
     String m_strCurImage = "";
     CharityModel m_curCharity;
+    CategoryModel emptyCategory = new CategoryModel();
 
     CharityService m_charityService = new CharityService();
 
@@ -64,6 +69,57 @@ public class CharityEditController extends BaseController implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        emptyCategory.setID(0);
+        emptyCategory.setName("Select category");
+
+        ArrayList<CategoryModel> arrCategories = this.m_charityService.getCategories();
+        comboData.add(emptyCategory);
+        comboData.addAll(arrCategories);
+
+        comboCategory.setCellFactory(
+            new Callback<ListView<CategoryModel>, ListCell<CategoryModel>>() {
+                @Override public ListCell<CategoryModel> call(ListView<CategoryModel> param) {
+                    final ListCell<CategoryModel> cell = new ListCell<CategoryModel>() {
+                        {
+                            super.setPrefWidth(100);
+                        }
+                        @Override public void updateItem(CategoryModel item,
+                                                         boolean empty) {
+                            super.updateItem(item, empty);
+                            if (item != null) {
+                                setText(item.getName());
+                            }
+                            else {
+                                setText("");
+                            }
+                        }
+                    };
+                    return cell;
+                }
+            });
+
+        comboCategory.setConverter(new StringConverter<CategoryModel>(){
+
+            @Override
+            public String toString(CategoryModel object) {
+                return object == null ? null : object.getName();
+            }
+
+            @Override
+            public CategoryModel fromString(String string) {
+                for( int i = 0; i < comboData.size(); i++ ) {
+                    CategoryModel category = comboData.get(i);
+                    if(string.compareTo(category.getName()) == 0) {
+                        return category;
+                    }
+                }
+
+                return emptyCategory;
+            }
+        });
+
+        comboCategory.setItems(comboData);
+
         this.initControls(this.m_curCharity);
     }
     
@@ -83,7 +139,7 @@ public class CharityEditController extends BaseController implements Initializab
                 // Generate File name
                 long lTime = System.currentTimeMillis() / 1000;
 
-                String strImgPath = getAppPath() + "images/" + lTime + "." + ext;
+                String strImgPath = getAppPath() + "images/charity/" + lTime + "." + ext;
                 File destFile = new File(strImgPath);
 
                 // Copy File
@@ -125,10 +181,10 @@ public class CharityEditController extends BaseController implements Initializab
         }
 
         // Check Category
-        String strCategory = txtCategory.getText();
-        if(strName.trim().length() == 0) {
-            this.showAlert("Please Input the Category name.");
-            txtCategory.requestFocus();
+        CategoryModel selectedCategory = comboCategory.getSelectionModel().getSelectedItem();
+        if(selectedCategory.getID() == 0) {
+            this.showAlert("Please Select a Category.");
+            comboCategory.requestFocus();
             return;
         }
 
@@ -177,10 +233,10 @@ public class CharityEditController extends BaseController implements Initializab
         // Create New Charity Object to Save
         CharityModel newCharity = new CharityModel();
         newCharity.setName(strName);
-        newCharity.setBIO(strBIO);
-        newCharity.setImage(m_strCurImage);
-        newCharity.setSite(strSite);
-        newCharity.setCategory(strCategory);
+        newCharity.setBio(strBIO);
+        newCharity.setImageUrl(m_strCurImage.replace(getAppPath() + "images/charity/", ""));
+        newCharity.setWebSite(strSite);
+        newCharity.setCategory(selectedCategory.getID());
         newCharity.setMetric(strMetric);
         newCharity.setAmount(dblAmount);
         newCharity.setNumber(nNumber);
@@ -217,13 +273,15 @@ public class CharityEditController extends BaseController implements Initializab
         this.showWindow(event, homeScene);
     }
 
-    private void initControls(CharityModel charity) {
+    public void initControls(CharityModel charity) {
         this.m_curCharity = charity;
 
         if(this.m_curCharity == null) {
             txtName.setText("");
             txtSite.setText("");
-            txtCategory.setText("");
+
+            comboCategory.setValue(emptyCategory);
+
             txtBio.setText("");
             txtMetric.setText("");
             txtNumber.setText("0");
@@ -236,17 +294,31 @@ public class CharityEditController extends BaseController implements Initializab
         }
         else {
             txtName.setText(m_curCharity.getName());
-            txtSite.setText(m_curCharity.getSite());
-            txtCategory.setText(m_curCharity.getCategory());
-            txtBio.setText(m_curCharity.getBIO());
+            txtSite.setText(m_curCharity.getWebSite());
+
+            CategoryModel selected = this.getCategory(m_curCharity);
+            comboCategory.setValue(selected);
+
+            txtBio.setText(m_curCharity.getBio());
             txtMetric.setText(m_curCharity.getMetric());
             txtNumber.setText(String.valueOf(m_curCharity.getNumber()));
-            txtAmount.setText(String.valueOf(m_curCharity.getName()));
+            txtAmount.setText(String.valueOf(m_curCharity.getAmount()));
 
-            m_strCurImage = m_curCharity.getImage();
-            imgLogo.setImage(new Image(m_strCurImage));
+            m_strCurImage = getAppPath() + "images/charity/" + m_curCharity.getImageUrl();
+            imgLogo.setImage(new Image("file:///" + m_strCurImage));
 
             btnSave.setText("Update Charity");
         }
+    }
+
+    private CategoryModel getCategory(CharityModel charity) {
+        for(int i = 0; i < this.comboData.size(); i++) {
+            CategoryModel item = this.comboData.get(i);
+            if(item.getID() == charity.getCategory()) {
+                return item;
+            }
+        }
+
+        return emptyCategory;
     }
 }

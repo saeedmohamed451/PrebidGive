@@ -8,9 +8,12 @@ package give.base.controller;
 import give.Give;
 import static give.Give.RESOURCE_PATH;
 import give.core.db.GiveDBHelper;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,6 +31,19 @@ public class BaseController {
     
     public BaseController (){
         this.m_dbHelper = Give.G_DBHelper;
+    }
+
+    public void onLinkLogoutPressed(ActionEvent event) throws IOException {
+        if(this.showConfirm("Would you like to logout now?")) {
+            Give.LOGIN_USER = null;
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(BaseController.getResourceURL("view/fxml_login.fxml"));
+            Scene homeScene = new Scene(loader.load());
+
+            // Get stage and transfer to home scene
+            this.showWindow(event, homeScene);
+        }
     }
 
     public static String getAppPath() {

@@ -8,6 +8,8 @@ package give.base.db;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import give.base.model.BaseModel;
+import give.core.model.CategoryModel;
+import give.core.model.CharityModel;
 import give.core.model.UserModel;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -143,7 +145,17 @@ public abstract class DBHelper {
                         UserModel element = new UserModel(rs);
                         
                         arrRecords.add(element);
-                    }                    
+                    }
+                    else if(className.compareTo(CharityModel.class.getSimpleName()) == 0) {
+                        CharityModel element = new CharityModel(rs);
+
+                        arrRecords.add(element);
+                    }
+                    else if(className.compareTo(CategoryModel.class.getSimpleName()) == 0) {
+                        CategoryModel element = new CategoryModel(rs);
+
+                        arrRecords.add(element);
+                    }
                 }
             } 
             finally {
