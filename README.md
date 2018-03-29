@@ -1,6 +1,5 @@
-echo "# PrebidGive" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/saeedmohamed451/PrebidGive.git
-git push -u origin master
+How to setup software.
+
+1. setup mysql ; db_dump.sql
+2. update db.ini
+3. Run netbeans
