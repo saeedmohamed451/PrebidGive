@@ -8,25 +8,23 @@
 <?import javafx.scene.text.Font?>
 
 <?import java.net.URL?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.CharityListController">
+<AnchorPane fx:id="mainPane" onMousePressed="#mainPanePressed" onMouseDragged="#mainPaneDragged" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.CharityListController">
    <stylesheets>
       <URL value="@charity_list.css" />
    </stylesheets>
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="222.0" text="Current Charities">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tableCharities" layoutX="23.0" layoutY="62.0" prefHeight="451.0" prefWidth="807.0">
-        <columns>
-        </columns>
-      </TableView>
-      <Hyperlink fx:id="linkNew" layoutX="709.0" layoutY="38.0" onAction="#onLinkNewPressed" text="New" />
-      <Hyperlink fx:id="lineEdit" layoutX="751.0" layoutY="38.0" onAction="#onLinkEditPressed" text="Edit" />
+      <Label fx:id="curChar" layoutX="25.0" layoutY="14.0" prefHeight="40.0" prefWidth="222.0" text="Current Charities"/>
+
+      
+      
+      <TableView fx:id="tableCharities"   layoutX="23.0" layoutY="62.0" prefHeight="480.0" prefWidth="847.0"/>
+
+      
+      
+      <Hyperlink fx:id="linkNew" layoutX="709.0" layoutY="38.0" onAction="#onLinkNewPressed" text="New |" />
+      <Hyperlink fx:id="lineEdit" layoutX="751.0" layoutY="38.0" onAction="#onLinkEditPressed" text="Edit |" />
       <Hyperlink fx:id="linkDelete" layoutX="787.0" layoutY="38.0" onAction="#onLinkDeletePressed" text="Delete" />
-      <Label layoutX="745.0" layoutY="40.0" text="|" />
-      <Label layoutX="784.0" layoutY="40.0" text="|" />
-      <Hyperlink layoutX="14.0" layoutY="518.0" onAction="#onCloseBtnPressed" text="&lt; Back to Home" />
+
+      <Hyperlink layoutX="14.0" layoutY="550.0" onAction="#onCloseBtnPressed" text="&lt; Back to Home" />
    </children>
 </AnchorPane>

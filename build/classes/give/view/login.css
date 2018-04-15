@@ -1,18 +1,12 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Jan 4, 2018, 3:06:31 PM
-    Author     : noahwebb
-*/
-
-root { 
-    display: block;
+@font-face{
+    
+    font-family: Slim Joe;
+    src: url("fonts/Slim-Joe.otf");
+    
 }
+
 .root {
-/*-fx-background-image: url("login_background.jpg");*/
+    -fx-background-image: url("images/login_background.png");
 }
 .label {
     -fx-font-size: 12px;
@@ -21,11 +15,12 @@ root {
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
-#welcome-text {
-   -fx-font-size: 28px;
-   -fx-font-family: "Arial Black";
-   -fx-fill: #818181;
-   /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+#welcometext {
+   -fx-font-size: 28;
+   -fx-font-family: Courier New;
+   -fx-text-fill: rgba(52, 152, 219,1.0);
+   -fx-padding: 0 0 -10 -5;
+/*   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
 }
 #actiontarget {
   -fx-fill: FIREBRICK;
@@ -39,4 +34,74 @@ root {
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#txtUserEmail{
+    
+    -fx-background-color: rgba(149, 165, 166, 0.7);
+    -fx-text-fill:white;
+    -fx-font-family: Courier New;
+    -fx-font-size: 17;
+    -fx-border-color: rgba(236, 240, 241, 0.7);
+    -fx-border-width: 0 0 3 0;
+    -fx-border-style: solid;
+    -fx-prompt-text-fill: white;
+    
+}
+
+#txtPassword{
+    
+    -fx-background-color: rgba(149, 165, 166, 0.7);
+    -fx-text-fill:white;
+    -fx-font-family: Courier New;
+    -fx-font-size: 17;
+    -fx-border-color: rgba(236, 240, 241, 0.7);
+    -fx-border-width: 0 0 3 0;
+    -fx-border-style: solid;
+    -fx-prompt-text-fill: white;
+    
+    
+}
+
+
+
+
+#forgotButton{
+    
+   -fx-alignment:BASELINE_RIGHT;
+   -fx-font-family: Courier New;
+   -fx-text-fill:white;
+   -fx-font-size: 15;
+   -fx-padding: -10 0 0 0;
+    
+}
+
+#loginButton{
+    
+    -fx-background-radius: 25;
+    -fx-background-color: rgba(52, 152, 219,0.7);
+    -fx-text-fill:white;
+    -fx-font-size: 15;
+    -fx-font-family: Courier New;
+    
+
+    
+    
+}
+#mainPane{
+    
+    -fx-padding: 0 0 10 0;
+    
+}
+
+#createAccount{
+    
+    
+    -fx-background-color: rgba(236, 240, 241,0.8);
+    -fx-background-radius: 25;
+    -fx-font-size: 14;
+    -fx-font-family: Courier New;
+    
+    
+    
 }

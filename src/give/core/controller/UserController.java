@@ -12,15 +12,30 @@ import give.core.services.UserService;
 import give.util.ValidationUtil;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -36,6 +51,16 @@ public class UserController extends BaseController implements Initializable {
     @FXML private TextField txtCurPwd;
     @FXML private TextField txtPassword;
     @FXML private TextField txtConfPwd;
+    @FXML private TextField yourDonationField, firstTopDonationField, secondTopDonationField, thirdTopDonationField, firstDonationNameField, secondDonationNameField, thirdDonationNameField;
+    @FXML private VBox accountSettingsPane;
+    @FXML private HBox accountStatusPane;
+    @FXML public Pane menuBar;
+    @FXML public double xOffset, yOffset;
+    @FXML public Stage stage;
+    @FXML private RadioButton boxEmailChange, boxPasswordChange;
+
+    
+    public PieChart piechart;
 
     @FXML private Hyperlink linkStats;
     
@@ -45,14 +70,100 @@ public class UserController extends BaseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.m_strCurLocation = location.toString();
+       
+       
         
+        Integer allTime = 0, education = 0, animals = 0, enivironment = 0, health = 0, refuges = 0, hunger = 0, water = 0, children = 0, povetry = 0, injustice = 0;
+   
+        try{
+        String queryString = "SELECT * FROM prebid.user WHERE email=\""+UserModel.getUserEmail()+"\"";
+         Statement stmt = con.createStatement();
+            ResultSet rset = stmt.executeQuery(queryString);
+               while(rset.next()){
+                 
+                   
+                   education = rset.getInt(10);
+                   animals = rset.getInt(11);
+                   enivironment = rset.getInt(12);
+                   health = rset.getInt(13);
+                   refuges = rset.getInt(14);
+                   hunger = rset.getInt(15);
+                   water = rset.getInt(16);
+                   children = rset.getInt(17);
+                   povetry = rset.getInt(18);
+                   injustice = rset.getInt(19);
+                   
+                }
+
+        }catch(Exception e){
+            System.out.println("Exception" + e.getMessage());
+        }
+        allTime = education + animals + enivironment + health + refuges + hunger + water + children + povetry + injustice;
+        yourDonationField.setText(allTime.toString());
+        
+        ObservableList<PieChart.Data> pieChartData = 
+                FXCollections.observableArrayList(
+                    new PieChart.Data("Education", education),
+                    new PieChart.Data("Animals", animals),
+                    new PieChart.Data("Enivironment", enivironment),
+                    new PieChart.Data("Health", health),
+                    new PieChart.Data("Refuges", refuges),
+                    new PieChart.Data("Hunger", hunger),
+                    new PieChart.Data("Water", water),
+                    new PieChart.Data("Children", children),
+                    new PieChart.Data("Povetry", povetry),
+                    new PieChart.Data("Injustice", injustice));
+
+         
+        piechart.setTitle("Your donations");
+        piechart.setData(pieChartData);
+        
+//        SortedList <PieChart.Data>donacije = piechart.getData().sorted();
+//        
+//        
+//        
+//        Double first = donacije.get(9).getPieValue();
+//        Double second = donacije.get(8).getPieValue();
+//        Double third = donacije.get(7).getPieValue();
+//        
+//        firstTopDonationField.setText(first.toString());
+//        secondTopDonationField.setText(second.toString());
+//        thirdTopDonationField.setText(third.toString());
+//        
+//        firstDonationNameField.setText(donacije.get(9).getName());
+//        secondDonationNameField.setText(donacije.get(8).getName());
+//        thirdDonationNameField.setText(donacije.get(7).getName());
+//        
+       
         // If Edit User
         if(this.m_strCurLocation.contains("fxml_account")) {
-            lblUserName.setText(Give.LOGIN_USER.getUserName());
-            txtUserEmail.setText(Give.LOGIN_USER.getUserEmail());
+            //lblUserName.setText(Give.LOGIN_USER.getUserName());
+            //txtUserEmail.setText(Give.LOGIN_USER.getUserEmail());
 
-            linkStats.setVisible(Give.LOGIN_USER.getUserType() == UserModel.USER_TYPE_ADMIN);
+            //linkStats.setVisible(Give.LOGIN_USER.getUserType() == UserModel.USER_TYPE_ADMIN);
         }
+    }
+    
+    public void accountButtonPressed(ActionEvent event) throws IOException {
+        Parent accountParent = FXMLLoader.load(BaseController.getResourceURL("view/fxml_account.fxml"));
+        Scene accountScene = new Scene(accountParent);
+       
+        // Get stage and transfer to give scene
+        this.showWindow(event, accountScene);
+    }
+    
+    public void statsPressed(){
+    
+        accountSettingsPane.setVisible(false);
+        accountStatusPane.setVisible(true);
+        
+    }
+    
+    public void settingsPressed(){
+    
+        accountSettingsPane.setVisible(true);
+        accountStatusPane.setVisible(false);
+        
     }
  
     public void onSignupBtnPressed(ActionEvent event) throws IOException {
@@ -197,10 +308,30 @@ public class UserController extends BaseController implements Initializable {
     
     public void onCancelBtnPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(BaseController.getResourceURL(m_strCurLocation.contains("fxml_signup") ? "view/fxml_login.fxml" : "view/fxml_home.fxml"));
+        loader.setLocation(BaseController.getResourceURL(m_strCurLocation.contains("") ? "view/fxml_login.fxml" : "view/fxml_home.fxml"));
         Scene homeScene = new Scene(loader.load());
+        homeScene.getStylesheets().add("give/view/login.css");
         
         // Get stage and transfer to home scene
         this.showWindow(event, homeScene);
     }
+    
+    public void menuBarPressed(MouseEvent event){
+    
+        stage = (Stage)menuBar.getScene().getWindow();
+         xOffset = event.getSceneX();
+         yOffset = event.getSceneY();
+        
+    }
+    
+    
+    public void menuBarDragged(MouseEvent event){
+        stage = (Stage)menuBar.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+        
+        
+    }
+    
+    
 }

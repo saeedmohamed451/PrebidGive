@@ -1,30 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.HomeController">
+
+<AnchorPane fx:id="mainPane" prefHeight="650.0" prefWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.HomeController">
     <stylesheets>
         <URL value="@home.css" />
     </stylesheets>
-   <children>
-      <Label fx:id="lblUserName" alignment="TOP_RIGHT" layoutX="356.0" layoutY="16.0" prefHeight="23.0" prefWidth="183.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <VBox alignment="CENTER" layoutX="2.0" layoutY="77.0" prefHeight="223.0" prefWidth="594.0" spacing="20.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#giveButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Give" />
-            <Button fx:id="btnCharity" mnemonicParsing="false" onAction="#charityButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Charities" />
-            <Button mnemonicParsing="false" onAction="#accountButtonPressed" prefHeight="34.0" prefWidth="85.0" text="Account" />
-         </children>
-      </VBox>
-      <Hyperlink fx:id="linkLogout" layoutX="540.0" layoutY="16.0" onAction="#onLinkLogoutPressed" text="Logout" />
-   </children>
+    <children>
+       
+        <!-- Top Menu Bar Start-->
+       
+        <Pane fx:id="menuBar" prefHeight="70" prefWidth="1100.0" layoutX="0" layoutY="0" onMousePressed="#menuBarPressed" onMouseDragged="#menuBarDragged"  >
+            <Label visible="false" fx:id="lblUserName" text="test" alignment="CENTER" layoutX="870" layoutY="34.0" prefHeight="23.0" prefWidth="183.0"/>
+            <Label fx:id="logo" text="LOGO" layoutX="20" layoutY="10"/>
+          
+            <!-- Button GIVE (video player start) -->
+            <Button fx:id="bntGive" onAction="#giveButtonPressed" layoutX="850" layoutY="20" prefHeight="34.0" prefWidth="100.0" alignment="CENTER" text="" />
+          
+            <!-- Menu buttons -->
+            <HBox fx:id="btnMenu" layoutX="320.0" layoutY="32.0" spacing="40" alignment="CENTER">
+                <Button fx:id="btnCharity"  onAction="#charityButtonPressed"  prefHeight="34.0" prefWidth="120.0" alignment="CENTER" text="CHAIRITIES" />
+                <Button  fx:id="btnAccount" onAction="#accountButtonPressed"  prefHeight="34.0" prefWidth="100.0" alignment="CENTER" text="ACCOUNT" />
+                <Button  fx:id="btnContact"  prefHeight="34.0" prefWidth="120.0" alignment="CENTER" text="CONTACT US" />
+            </HBox>
+          
+          
+            <!-- Minimise, close, logout buttons -->
+            <Button fx:id="btnMinimize" layoutX="1040.0" layoutY="-7" maxHeight="12" maxWidth="25" text="_" alignment="TOP_CENTER" onAction="#minimizeButtonPressed"  />
+            <Button fx:id="btnClose" layoutX="1065.0" layoutY="-7" maxHeight="12" maxWidth="25" text="x" alignment="TOP_CENTER" onAction="#closeButtonPressed" />
+            <Hyperlink fx:id="linkLogout" layoutX="1025.0" layoutY="32.0" onAction="#onLinkLogoutPressed" text="LOGOUT" />
+
+        </Pane>
+      
+        <!-- Top Menu Bar End-->
+      
+      
+      
+        <!-- Main pane of program START -->
+        <ScrollPane fx:id="scrollPane" vbarPolicy="ALWAYS" hbarPolicy="NEVER" prefHeight="580" prefWidth="1050.0" layoutX="50" layoutY="70">
+            <content>
+
+                <FlowPane fx:id="charitiesList"  prefWidth="1000.0" alignment="TOP_CENTER">
+                
+                    <!-- Label of MY CHARITIES and SELECT UP TO 4 -->
+                    <VBox fx:id="selectInfoLbl" prefWidth="1000" prefHeight="60">
+                        <Label fx:id="myCharTxt" text="MY CHARITIES"/>
+                        <Label fx:id="selUpToTxt" text="SELECT UP TO 4"/>
+                    </VBox>
+                
+                
+                    <!-- Select Field-->
+                    <HBox fx:id="selectField" visible="true" prefWidth="1000" prefHeight="60" spacing="20" alignment="CENTER">
+                        <Button fx:id="firstField" disable="true" wrapText="true" minHeight="220" maxWidth="220" prefHeight="220" text="SELECT A GREAT CHARITY FROM BELOW"/>
+                        <Button fx:id="secondField" disable="true" minHeight="220" minWidth="220" maxWidth="220" text="AND ANOTHER"/>
+                        <Button fx:id="thirdField" disable="true" minHeight="220" minWidth="220"  maxWidth="220"  text="AND ANOTHER"/>
+                        <Button fx:id="fourthField" disable="true" minHeight="220" minWidth="220" maxWidth="220" text="AND ANOTHER"/>
+                    </HBox>
+                
+                    <VBox fx:id="charityCheckList" visible="false" spacing="0" alignment="TOP_CENTER"  VBox.vgrow="ALWAYS" minWidth="1000" minHeight="80" maxHeight="2000" >
+                        <children>
+                            
+                        
+                        
+                        </children>
+                    </VBox>
+                    
+                    
+                
+                    <!-- Label for CLICK THE CATEGORIES -->
+                    <VBox fx:id="clickTheInfo" prefWidth="1000" prefHeight="60">
+                        <Label fx:id="clickCateg" text="CLICK THE CATEGORIES AND SELECT YOUR CHARITIES"/>
+                    </VBox>
+                
+                    <!-- Charities button -->
+                    <Button fx:id="urgentChar" text="1|URGENT" onAction="#charPressed"  minHeight="250" minWidth="250"/>
+                    <Button fx:id="educationChar" text="2|EDUCATION" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="animalsChar" text="3|ANIMALS" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="enivironmentChar" text="4|ENIVIRONMENT" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="healthChar" text="5|HEALTH" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="refugesChar" text="6|REFUGES" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="hungerChar" text="7|HUNGER" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="waterChar" text="8|WATER" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="childrenChar" text="9|CHILDREN" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="povetryChar" text="10|POVETRY" onAction="#charPressed" minHeight="250" minWidth="250"/>
+                    <Button fx:id="injusticeChar" text="11|INJUSTICE" onAction="#charPressed" minHeight="250" minWidth="250"/>
+          
+                </FlowPane>
+            </content>
+        </ScrollPane>
+        <!--Main Pane of program END-->
+      
+    </children>
 </AnchorPane>
+

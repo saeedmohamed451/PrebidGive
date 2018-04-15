@@ -11,15 +11,24 @@ import give.core.model.UserModel;
 import give.core.services.UserService;
 import give.util.ValidationUtil;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
  
 public class LoginController extends BaseController {
     @FXML private TextField txtUserEmail;
     @FXML private TextField txtPassword;
+    @FXML private Hyperlink createAccount;
+    
 
     /**
      * 
@@ -81,26 +90,42 @@ public class LoginController extends BaseController {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(BaseController.getResourceURL(findUser.getUserType() == UserModel.USER_TYPE_ADMIN ? "view/fxml_admin_home.fxml" : "view/fxml_home.fxml"));
         Scene homeScene = new Scene(loader.load());
-        
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        ((Node)(event.getSource())).getScene().getWindow().hide();
         // Get stage and transfer to home scene
-        this.showWindow(event, homeScene);
+        stage.show();
     }
     
     public void onCreateAccountPressed(ActionEvent event) throws IOException {
+        
+        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(BaseController.getResourceURL("view/fxml_signup.fxml"));        
         Scene homeScene = new Scene(loader.load());
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        ((Node)(event.getSource())).getScene().getWindow().hide();
         
         // Get stage and transfer to home scene
-        this.showWindow(event, homeScene);
+        stage.show();
     }
     
     public void onForgotPressed(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(BaseController.getResourceURL("view/fxml_forgot.fxml"));        
         Scene homeScene = new Scene(loader.load());
-        
+        Stage stage = new Stage();
+        stage.setScene(homeScene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        ((Node)(event.getSource())).getScene().getWindow().hide();
         // Get stage and transfer to home scene
-        this.showWindow(event, homeScene);
+        stage.show();
+        
     }
+    
+    
+         
 }

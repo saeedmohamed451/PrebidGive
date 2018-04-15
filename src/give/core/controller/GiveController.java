@@ -40,7 +40,7 @@ public class GiveController extends BaseController implements Initializable {
     private File[] vidFiles;
     private boolean isPaused;
 
-    Stage mainStage;
+    public Stage mainStage;
 
     /**
      * Initializes the controller class.

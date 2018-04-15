@@ -19,7 +19,7 @@ public class UserModel extends BaseModel {
     public static final int USER_TYPE_COMMON = 2;
     
     private String m_strUserName;
-    private String m_strUserEmail;
+    private static String m_strUserEmail;
     private int m_nUserType;
     private String m_strPassword;
     
@@ -59,7 +59,7 @@ public class UserModel extends BaseModel {
     public String getUserName() { return this.m_strUserName; }
     public void setUserName(String strParamVal) { this.m_strUserName = strParamVal; }
     
-    public String getUserEmail() { return this.m_strUserEmail; }
+    public static String getUserEmail() { return UserModel.m_strUserEmail; }
     public void setUserEmail(String strParamVal) { this.m_strUserEmail = strParamVal; }
     
     public String getPassword() { return this.m_strPassword; }

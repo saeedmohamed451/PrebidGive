@@ -1,7 +1,398 @@
-/*
- * Empty Stylesheet file.
- */
+@font-face{
 
-.mainFxmlClass {
+    font-family: Slim Joe;
+    src: url("fonts/Slim-Joe.otf");
 
 }
+
+
+#mainPane{
+
+    -fx-background-color: #00A8E7;
+
+}
+
+/*Top Menu Style START --------------------------------------------------------*/
+
+#menuBar{
+
+    -fx-background-color: rgba(0, 173, 239 ,1.0);
+    -fx-border-color: rgba(52, 73, 94, 0.3);
+    -fx-border-style:solid;
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+
+
+}
+
+
+
+#logo{
+
+    -fx-font-family: Slim Joe;
+    -fx-text-fill: white;
+    -fx-font-size: 31;
+
+
+}
+
+#bntGive{
+
+    -fx-background-color: transparent;
+    -fx-background-image:url("images/give.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+
+}
+
+#btnMenu .button{
+
+    -fx-background-color: transparent;
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 16;
+    -fx-text-fill:white;
+
+
+
+
+}
+
+#btnCharity{
+
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0;
+
+}
+
+#btnMenu .button:hover{
+
+    -fx-border-color: white;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0;
+
+
+}
+
+#btnMinimize{
+
+    -fx-background-color: transparent;
+    -fx-font-family: Kartika;
+    -fx-font-size:14;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-insets: 5 0 0 0;
+
+
+
+}
+
+#btnClose{
+
+    -fx-background-color: transparent;
+    -fx-font-family: Kartika;
+    -fx-font-size:19;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-insets: 5 5 12 5;
+
+
+
+}
+
+#linkLogout{
+
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 16;
+    -fx-text-fill:white;
+
+}
+
+#lblUserName{
+
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 18;
+    -fx-text-fill:white;
+
+}
+
+
+/*Top Menu Style END --------------------------------------------------------*/
+
+
+
+
+
+#scrollPane > .viewport {
+    -fx-background-color: transparent;
+}
+
+#scrollPane{
+
+    -fx-background-color: transparent;
+
+}
+
+
+#charitiesList{
+
+
+
+}
+
+#charitiesList #urgentChar, #educationChar, #animalsChar, #enivironmentChar, #healthChar, #refugesChar, #hungerChar, #waterChar, #childrenChar, #povetryChar, #injusticeChar{
+
+    -fx-background-color: white;
+    -fx-background-radius: 200;
+    -fx-padding: 45;
+    -fx-background-insets: 45;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.7), 20, 0, 0, 0);
+
+    -fx-text-fill:transparent;
+
+
+}
+
+#urgentChar{
+
+    -fx-background-image:url("images/urgent.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#educationChar{
+
+    -fx-background-image:url("images/education.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#animalsChar{
+
+    -fx-background-image:url("images/animals.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+
+#enivironmentChar{
+
+    -fx-background-image:url("images/environment.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#healthChar{
+
+    -fx-background-image:url("images/health.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+
+#refugesChar{
+
+    -fx-background-image:url("images/refugees.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#hungerChar{
+
+    -fx-background-image:url("images/hunger.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#waterChar{
+
+    -fx-background-image:url("images/water.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#childrenChar{
+
+    -fx-background-image:url("images/children.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#povetryChar{
+
+    -fx-background-image:url("images/povetry.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+#injusticeChar{
+
+    -fx-background-image:url("images/injustice.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+}
+
+
+#myCharTxt{
+
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-padding:50 0 0 15;
+
+}
+
+#selUpToTxt{
+
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-padding:-7 0 50 55;
+
+
+}
+
+#selectField .button{
+
+    -fx-background-color: rgba(52, 73, 94,0.7);
+    -fx-background-radius: 25;
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 18;
+    -fx-text-alignment: center;
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+    
+
+}
+
+#selectField .button:disabled{
+    
+    -fx-opacity: 1;
+    
+}
+
+
+#clickCateg{
+
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-padding:50 0 35 15;
+
+}
+
+#charityCheckList{
+
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+    -fx-padding:-250 0 0 0;
+    -fx-background-insets: -250 0 0 0;
+    -fx-border-insets: -250 0 0 0;
+    -fx-max-width: 1000;
+
+
+
+}
+
+
+#checkPane{
+
+    -fx-background-color: transparent;;
+    -fx-background-radius: 0;
+    -fx-min-height: 70;
+    -fx-max-width: 800;
+
+
+}
+
+#descriptionLabel{
+
+    -fx-min-width: 700;
+    -fx-max-width: 700;
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 21;
+    -fx-text-fill: #7f8c8d;
+    -fx-border-style: solid;
+    -fx-border-color:#00A8E7;
+    -fx-border-width: 0 0 2 0;
+
+}
+
+#nameLabel{
+
+    -fx-min-width: 700;
+    -fx-max-width: 700;
+    -fx-font-family: Slim Joe;
+    -fx-font-size: 21;
+    -fx-text-fill: #00A8E7;
+
+}
+
+#checkBox{
+
+    -fx-text-fill: transparent;
+
+}
+
+#checkBox .box{
+
+    -fx-background-color:transparent;
+    -fx-border-style: solid;
+    -fx-border-color:#7f8c8d;
+    -fx-border-width: 2 ;
+
+
+
+}
+
+#checkBox:selected .mark {
+
+    -fx-background-color: white;
+   
+
+
+}
+
+#checkBox:selected .box{
+    
+    -fx-background-color:#00A8E7;
+    -fx-border-color:#00A8E7;
+    
+    
+}
+
+
+#charityName{
+
+    -fx-font-family: Slim Joe;
+    -fx-text-fill: #00A8E7;
+    -fx-font-size: 25;
+    -fx-padding: 0 700 0 0;
+    -fx-border-insets: 0 700 0 0;
+    -fx-background-insets: 0 700 0 0;
+
+}
+
+#charityPic{
+    
+    -fx-background-radius:25
+    
+}
+
+#charityCategoryLogoImg{
+    
+    -fx-background-color: transparent;
+   
+}
+

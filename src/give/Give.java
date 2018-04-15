@@ -10,10 +10,13 @@ import give.base.db.DBConfig;
 import give.core.db.GiveDBHelper;
 import give.core.model.UserModel;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -21,6 +24,7 @@ import javafx.stage.Stage;
  */
 public class Give extends Application {
     
+    public double xOffset, yOffset;
     public static GiveDBHelper G_DBHelper = null;
     public static String RESOURCE_PATH = null;
     public static UserModel LOGIN_USER = null;
@@ -33,10 +37,30 @@ public class Give extends Application {
         
         Scene scene = new Scene(root);
         stage.resizableProperty().setValue(Boolean.FALSE);
-        
+        scene.getStylesheets().add("give/view/login.css");
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Give");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
+        
+             root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        
+        //move around here
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+        
     }
 
     /**

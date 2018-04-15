@@ -13,10 +13,16 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class AdminHomeController extends BaseController implements Initializable {
     @FXML
     private Label lblUserName;
+    @FXML public double xOffset, yOffset;
+    public Stage stage;
+    @FXML AnchorPane mainPane;
 
     /**
      * Initializes the controller class.
@@ -41,4 +47,22 @@ public class AdminHomeController extends BaseController implements Initializable
         // Get stage and transfer to charity scene
         this.showWindow(event, charityScene);
     }
+    
+    public void mainPanePressed(MouseEvent event){
+    
+        stage = (Stage)mainPane.getScene().getWindow();
+         xOffset = event.getSceneX();
+         yOffset = event.getSceneY();
+        
+    }
+    
+    
+    public void mainPaneDragged(MouseEvent event){
+        stage = (Stage)mainPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+        
+        
+    }
+    
 }

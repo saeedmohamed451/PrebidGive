@@ -31,7 +31,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -52,6 +55,10 @@ public class CharityEditController extends BaseController implements Initializab
 
     @FXML private ToggleButton btnUpload;
     @FXML private ToggleButton btnSave;
+    @FXML public double xOffset, yOffset;
+    public Stage stage;
+    @FXML AnchorPane mainPane;
+
 
     
     // Data Variable
@@ -320,5 +327,21 @@ public class CharityEditController extends BaseController implements Initializab
         }
 
         return emptyCategory;
+    }
+    public void mainPanePressed(MouseEvent event){
+    
+        stage = (Stage)mainPane.getScene().getWindow();
+         xOffset = event.getSceneX();
+         yOffset = event.getSceneY();
+        
+    }
+    
+    
+    public void mainPaneDragged(MouseEvent event){
+        stage = (Stage)mainPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+        
+        
     }
 }

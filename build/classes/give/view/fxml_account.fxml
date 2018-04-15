@@ -1,53 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.chart.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.UserController">
+<AnchorPane fx:id="mainPane" prefHeight="650.0" prefWidth="1100.0" maxWidth="1100.0" maxHeight="650.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="give.core.controller.UserController">
     <stylesheets>
         <URL value="@account.css" />
     </stylesheets>
-   <children>
-      <Label layoutX="25.0" layoutY="14.0" text="Acount Settings" textFill="#1221eb">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtUserEmail" layoutX="65.0" layoutY="121.0" />
-      <PasswordField fx:id="txtCurPwd" layoutX="351.0" layoutY="117.0" />
-      <Label layoutX="351.0" layoutY="94.0" text="current password" />
-      <PasswordField fx:id="txtPassword" layoutX="351.0" layoutY="178.0" />
-      <Label layoutX="351.0" layoutY="153.0" text="new password" />
-      <PasswordField fx:id="txtConfPwd" layoutX="351.0" layoutY="239.0" />
-      <Label layoutX="351.0" layoutY="216.0" text="confirm new password" />
-      <Label layoutX="327.0" layoutY="61.0" text="Change Password">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="65.0" layoutY="64.0" text="Change Email">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Button layoutX="216.0" layoutY="304.0" mnemonicParsing="false" onAction="#onUpdateBtnPressed" prefHeight="25.0" prefWidth="126.0" text="Save" />
-      <Hyperlink layoutX="27.0" layoutY="335.0" text="Stats">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Hyperlink>
-      <ToggleButton layoutX="353.0" layoutY="304.0" mnemonicParsing="false" onAction="#onCancelBtnPressed" prefHeight="25.0" prefWidth="120.0" text="Cancel" />
-      <Label fx:id="lblUserName" layoutX="159.0" layoutY="19.0" prefHeight="20.0" prefWidth="120.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-   </children>
+    <children>
+        <!-- Top Menu Bar Start-->
+       
+        <Pane fx:id="menuBar" prefHeight="70" prefWidth="1100.0" layoutX="0" layoutY="0" onMousePressed="#menuBarPressed" onMouseDragged="#menuBarDragged" >
+            <Label visible="false" fx:id="lblUserName" text="test" alignment="CENTER" layoutX="870" layoutY="34.0" prefHeight="23.0" prefWidth="183.0"/>
+            <Label fx:id="logo" text="LOGO" layoutX="20" layoutY="10"/>
+          
+            <!-- Button GIVE (video player start) -->
+            <Button fx:id="bntGive" onAction="#giveButtonPressed" layoutX="850" layoutY="20" prefHeight="34.0" prefWidth="100.0" alignment="CENTER" text="" />
+          
+            <!-- Menu buttons -->
+            <HBox fx:id="btnMenu" layoutX="320.0" layoutY="32.0" spacing="40" alignment="CENTER">
+                <Button fx:id="btnCharity" onAction="#charityButtonPressed"  prefHeight="34.0" prefWidth="120.0" alignment="CENTER" text="CHAIRITIES" />
+                <Button  fx:id="btnAccount" onAction="#accountButtonPressed"  prefHeight="34.0" prefWidth="100.0" alignment="CENTER" text="ACCOUNT" />
+                <Button  fx:id="btnContact"  prefHeight="34.0" prefWidth="120.0" alignment="CENTER" text="CONTACT US" />
+            </HBox>
+          
+          
+            <!-- Minimise, close, logout buttons -->
+            <Button fx:id="btnMinimize" layoutX="1040.0" layoutY="-7" maxHeight="12" maxWidth="25" text="_" alignment="TOP_CENTER" onAction="#minimizeButtonPressed"  />
+            <Button fx:id="btnClose" layoutX="1065.0" layoutY="-7" maxHeight="12" maxWidth="25" text="x" alignment="TOP_CENTER" onAction="#closeButtonPressed" />
+            <Hyperlink fx:id="linkLogout" layoutX="1025.0" layoutY="32.0" onAction="#onLinkLogoutPressed" text="LOGOUT" />
+
+        </Pane>
+      
+        
+      
+        <!-- Top Menu Bar End-->
+        
+        <!-- Account Settings START-->
+        <Button text="STATS" fx:id="btnStats" onAction="#statsPressed" layoutX="440.0" layoutY="85" prefWidth="80" />
+        <Button text="SETTINGS" fx:id="btnSettings" onAction="#settingsPressed" layoutX="560.0" layoutY="85" prefWidth="80"  />
+        
+        <VBox fx:id="accountSettingsPane" visible="false" alignment="TOP_CENTER" prefWidth="950" prefHeight="450" layoutX="75" layoutY="125">
+              
+            <fx:define>
+                <ToggleGroup fx:id="tGroup"/>
+            </fx:define>
+            
+            <HBox fx:id="titleBar" alignment="CENTER" prefWidth="950" prefHeight="65">
+                <Label fx:id="title" text="ACCOUNT SETTINGS"/>
+            </HBox>
+              
+            <HBox fx:id="loginBar" alignment="CENTER" maxWidth="800" prefHeight="300" >
+                  
+                <VBox fx:id="emailChangePane" prefWidth="400" prefHeight="260" alignment="CENTER_LEFT">
+                      
+                    <Label fx:id="changeEmailLabel" text="Change Email" maxWidth="280" prefHeight="45" alignment="CENTER" />
+                    <TextField fx:id="emailChangeField" promptText="InsertEmail" alignment="CENTER" maxWidth="300" prefHeight="50"/>
+                    <VBox alignment="BOTTOM_CENTER" prefWidth="400" fx:id="emailRadioPane" >
+                        <RadioButton fx:id="boxEmailChange" toggleGroup="$tGroup" selected="false"/>
+                    </VBox>
+                    
+                </VBox>
+                  
+                <VBox fx:id="passwordChangePane" prefWidth="400" prefHeight="260" alignment="TOP_CENTER">
+                      
+                    <Label fx:id="changePasswordLabel" text="Change Password" maxWidth="400" prefHeight="53" alignment="CENTER" />
+                    <Label fx:id="currentPasswordLabel" text="CurrentPassword" prefWidth="250" alignment="CENTER_LEFT"/>
+                    <TextField fx:id="currentPasswordField" promptText="CurrentPassword" alignment="CENTER" maxWidth="250" prefHeight="50"/>
+                    <Label fx:id="newPasswordLabel" text="NewPassword" prefWidth="250" alignment="CENTER_LEFT"/>
+                    <PasswordField fx:id="newPasswordField" promptText="NewPassword" alignment="CENTER" maxWidth="250" prefHeight="50"/>
+                    <Label fx:id="confirmPasswordLabel" text="ConfPassword" prefWidth="250" alignment="CENTER_LEFT"/>
+                    <PasswordField fx:id="confirmPasswordField" promptText="ConfPassword" alignment="CENTER" maxWidth="250" prefHeight="50"/>
+                    <RadioButton fx:id="boxPasswordChange" toggleGroup="$tGroup" selected="true"/>
+                </VBox>
+                  
+            </HBox>
+              
+            <Button fx:id="btnSave" text="Save" prefWidth="150" prefHeight="60"/>
+              
+        </VBox>
+        
+        <!-- Account Settings END-->
+        
+        <HBox fx:id="accountStatusPane" visible="true" alignment="CENTER_LEFT" prefWidth="950" prefHeight="450" layoutX="75" layoutY="145">
+              
+            
+            <AnchorPane id="leftPane" prefHeight="450" maxHeight="450" prefWidth="600" >
+                
+                <Label fx:id="firstLabel" text="Your donation in dollars" layoutX="30" layoutY="25"/>
+                <Label fx:id="secondLabel" text="Everyones donation in dollars" layoutX="30" layoutY="60"/>
+                <Label fx:id="thirdLabel" text="So far you have contributed:" layoutX="30" layoutY="100"/>
+                <Label fx:id="fourthLabel" text="Congratulations! You're helping make the world a better place" layoutX="30" layoutY="315"/>
+                <Label fx:id="fifthLabel" text="Share your good work and invite friends" layoutX="30" layoutY="350"/>
+                
+                <Button fx:id="facebook" layoutX="40" layoutY="380" prefHeight="50" prefWidth="50"/>
+                <Button fx:id="twitter" layoutX="110" layoutY="380" prefHeight="50" prefWidth="50"/>
+                
+                
+                <TextField editable="false" fx:id="yourDonationField" alignment="CENTER"  layoutX="300" layoutY="25" maxHeight="20" prefWidth="110"/>
+                <TextField editable="false" fx:id="everyDonationField" alignment="CENTER" layoutX="300" layoutY="60" maxHeight="20" prefWidth="110"/>
+                
+                <TextField editable="false" fx:id="firstTopDonationField" alignment="CENTER"  layoutX="30" layoutY="150" maxHeight="20" prefWidth="60"/>
+                <TextField editable="false" fx:id="secondTopDonationField" alignment="CENTER"  layoutX="30" layoutY="200" maxHeight="20" prefWidth="60"/>
+                <TextField editable="false" fx:id="thirdTopDonationField" alignment="CENTER"  layoutX="30" layoutY="250" maxHeight="20" prefWidth="60"/>
+                
+                <TextField editable="false" fx:id="firstDonationNameField" alignment="CENTER" layoutX="120" layoutY="150" maxHeight="20" prefWidth="120"/>
+                <TextField editable="false" fx:id="secondDonationNameField" alignment="CENTER" layoutX="120" layoutY="200" maxHeight="20" prefWidth="120"/>
+                <TextField editable="false" fx:id="thirdDonationNameField" alignment="CENTER" layoutX="120" layoutY="250" maxHeight="20" prefWidth="120"/>
+                
+                <ChoiceBox fx:id="periodSelect" value="Time Period" layoutX="420" layoutY="30" maxHeight="30" prefHeight="55" prefWidth="130">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Time Period"/>
+                            <String fx:value="This Month"/>
+                            <String fx:value="This Year"/>
+                            <String fx:value="All Time"/>
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                
+                
+            </AnchorPane>
+            
+           <PieChart fx:id="piechart" minHeight="430" minWidth="430" />
+              
+        </HBox>    
+
+        
+        
+        
+    </children>
 </AnchorPane>

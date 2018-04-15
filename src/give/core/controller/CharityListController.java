@@ -33,6 +33,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 
@@ -45,6 +48,9 @@ public class CharityListController extends BaseController implements Initializab
     @FXML private Hyperlink linkNew;
     @FXML private Hyperlink linkEdit;
     @FXML private Hyperlink linkDelete;
+    @FXML public double xOffset, yOffset;
+    public Stage stage;
+    @FXML AnchorPane mainPane;
 
     @FXML private ImageView imgLogo;
     @FXML private TableView<CharityModel> tableCharities;
@@ -88,25 +94,25 @@ public class CharityListController extends BaseController implements Initializab
         logoCol.setEditable(false);
 
         TableColumn nameCol = new TableColumn("Name");
-        nameCol.setMinWidth(100);
+        nameCol.setMinWidth(120);
         nameCol.setCellValueFactory(new PropertyValueFactory<CharityModel, String>("name"));
         nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         nameCol.setEditable(false);
 
         TableColumn siteCol = new TableColumn("WebSite");
-        siteCol.setMinWidth(200);
+        siteCol.setMinWidth(210);
         siteCol.setCellValueFactory(new PropertyValueFactory<CharityModel, String>("webSite"));
         siteCol.setCellFactory(TextFieldTableCell.forTableColumn());
         siteCol.setEditable(false);
 
         TableColumn categoryCol = new TableColumn("Category");
-        categoryCol.setMinWidth(100);
+        categoryCol.setMinWidth(105);
         categoryCol.setCellValueFactory(new PropertyValueFactory<CharityModel, String>("categoryName"));
         categoryCol.setCellFactory(TextFieldTableCell.forTableColumn());
         categoryCol.setEditable(false);
 
         TableColumn bioCol = new TableColumn("BIO");
-        bioCol.setMinWidth(320);
+        bioCol.setMinWidth(330);
         bioCol.setCellValueFactory(new PropertyValueFactory<CharityModel, String>("bio"));
         bioCol.setCellFactory(TextFieldTableCell.forTableColumn());
         bioCol.setEditable(false);
@@ -172,5 +178,22 @@ public class CharityListController extends BaseController implements Initializab
                 this.m_tblData.remove(selectedCharity);
             }
         }
+    }
+    
+    public void mainPanePressed(MouseEvent event){
+    
+        stage = (Stage)mainPane.getScene().getWindow();
+         xOffset = event.getSceneX();
+         yOffset = event.getSceneY();
+        
+    }
+    
+    
+    public void mainPaneDragged(MouseEvent event){
+        stage = (Stage)mainPane.getScene().getWindow();
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+        
+        
     }
 }
