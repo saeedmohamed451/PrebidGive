@@ -56,6 +56,7 @@ public class HomeController extends BaseController implements Initializable {
     @FXML public Pane menuBar;
     @FXML public double xOffset, yOffset;
     @FXML public Stage stage;
+    String firstInfo,secondInfo,thirdInfo,fourthInfo, fieldInfo[];
     
     
     private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
@@ -83,9 +84,88 @@ public class HomeController extends BaseController implements Initializable {
             }
         });
         
+        try{
+        String queryString = "SELECT firstField,secondField,thirdField,fourthField FROM prebid.user WHERE email = \""+UserModel.getUserEmail()+"\"";
+        Statement stmt = con.createStatement();
+        ResultSet rset = stmt.executeQuery(queryString);
+
+            while (rset.next()) {
+                firstInfo = rset.getString(1);
+                secondInfo = rset.getString(2);
+                thirdInfo = rset.getString(3);
+                fourthInfo = rset.getString(4);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Exception" + ex.getMessage());
+        }
         
+        setImage(firstInfo);
+        setImage(secondInfo);
+        setImage(thirdInfo);
+        setImage(fourthInfo);
 
     }
+    
+    public void setImage(String info){
+    
+        if(!info.equals("")){
+        fieldInfo = info.split("%", 3);
+        int fieldNum = Integer.parseInt(fieldInfo[0]);
+        String charityName = fieldInfo[1];
+        String imgUrl = fieldInfo[2];
+        
+        Image image = new Image(imgUrl);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(200);
+        imageView.setId("charityPic");
+
+            
+        if(fieldNum == 1){
+        
+            
+            firstField.setGraphic(imageView);
+            firstField.setText(charityName);
+            firstField.setTextFill(Color.TRANSPARENT);
+            firstField.setStyle("-fx-font-size:1; -fx-background-insets:0 4 0 4; -fx-text-fill:transparent; -fx-padding:0 0 0 10");
+            firstField.setMinWidth(230);
+            first = true;
+        
+        
+        }else if(fieldNum == 2){
+        
+            secondField.setGraphic(imageView);
+            secondField.setText(charityName);
+            secondField.setTextFill(Color.TRANSPARENT);
+            second = true;
+        
+        }else if(fieldNum == 3){
+        
+            thirdField.setGraphic(imageView);
+            thirdField.setText(charityName);
+            thirdField.setTextFill(Color.TRANSPARENT);
+            third = true;
+        
+        }else if(fieldNum == 4){
+        
+            fourthField.setGraphic(imageView);
+            fourthField.setText(charityName);
+            fourthField.setTextFill(Color.TRANSPARENT);
+            fourth = true;
+        
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        }
+    }
+    
 
     public void createField(String nm, String desc) {
 
@@ -111,7 +191,9 @@ public class HomeController extends BaseController implements Initializable {
         checkPane.getChildren().addAll(check, description, name);
         charityCheckList.getChildren().add(checkPane);
         configureCheckBox(check);
-
+        
+        if(check.getText().equals(firstField.getText()) || check.getText().equals(secondField.getText()) || check.getText().equals(thirdField.getText()) || check.getText().equals(fourthField.getText()))
+            check.setSelected(true);
     }
 
     private void configureCheckBox(CheckBox checkBox) {
@@ -132,7 +214,6 @@ public class HomeController extends BaseController implements Initializable {
             }
 
         });
-
     }
 
     public void charPressed(ActionEvent event) throws SQLException {
@@ -224,6 +305,11 @@ public class HomeController extends BaseController implements Initializable {
                     firstField.setMinWidth(230);
                     first = true;
                     
+                    try{
+                    String queryString = "UPDATE `prebid`.`user` SET `firstField`='"+1+"%"+box.getText()+"%"+image.impl_getUrl() +"' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
                 
                 }else if(second == false){
                 
@@ -232,6 +318,13 @@ public class HomeController extends BaseController implements Initializable {
                     secondField.setTextFill(Color.TRANSPARENT);
                     second = true;
                     
+                    try{
+                    String queryString = "UPDATE `prebid`.`user` SET `secondField`='"+2+"%"+box.getText()+"%"+image.impl_getUrl() +"' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
+                    
                 }else if(third == false){
                 
                     thirdField.setGraphic(imageView);
@@ -239,12 +332,26 @@ public class HomeController extends BaseController implements Initializable {
                     thirdField.setTextFill(Color.TRANSPARENT);
                     third = true;
                     
+                    try{
+                    String queryString = "UPDATE `prebid`.`user` SET `thirdField`='"+3+"%"+box.getText()+"%"+image.impl_getUrl() +"' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
+                    
                 }else if(fourth == false){
                 
                     fourthField.setGraphic(imageView);
                     fourthField.setText(box.getText());
                     fourthField.setTextFill(Color.TRANSPARENT);
                     fourth = true;
+                    
+                    try{
+                    String queryString = "UPDATE `prebid`.`user` SET `fourthField`='"+4+"%"+box.getText()+"%"+image.impl_getUrl() +"' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
                     
                 }
                 
@@ -260,21 +367,49 @@ public class HomeController extends BaseController implements Initializable {
                 firstField.setTextFill(Color.rgb(255, 255, 255, 0.6));
                 firstField.setWrapText(true);
                 firstField.setStyle("-fx-font-size:18; -fx-text-fill: rgba(255, 255, 255, 0.6);");
+                
+                try{
+                    String queryString = "UPDATE `prebid`.`user` SET `firstField`='' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
             }else if(box.getText().equals(secondField.getText())){
                 second = false;
                 secondField.setGraphic(null);
                 secondField.setText("AND ANOTHER");
                 secondField.setTextFill(Color.rgb(255, 255, 255, 0.6));
+                
+                try{
+                    String queryString = "UPDATE `prebid`.`user` SET `secondField`='' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
             }else if(box.getText().equals(thirdField.getText())){
                 third = false;
                 thirdField.setGraphic(null);
                 thirdField.setText("AND ANOTHER");
                 thirdField.setTextFill(Color.rgb(255, 255, 255, 0.6));
+                
+                try{
+                    String queryString = "UPDATE `prebid`.`user` SET `thirdField`='' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
             }else if(box.getText().equals(fourthField.getText())){
                 fourth = false;
                 fourthField.setGraphic(null);
                 fourthField.setText("AND ANOTHER");
                 fourthField.setTextFill(Color.rgb(255, 255, 255, 0.6));
+                
+                try{
+                    String queryString = "UPDATE `prebid`.`user` SET `fourthField`='' WHERE `id`='2';";
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate(queryString);
+                    }catch(Exception e){e.getMessage();}
+                
             }
 
         }
